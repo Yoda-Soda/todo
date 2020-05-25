@@ -1,0 +1,177 @@
+* {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+}
+
+body {
+  position: relative;
+  right: 140px;
+  background-color: #2d3031;
+  margin: 37px auto;
+  max-width: 850px;
+  display: grid;
+  grid-template-columns: 140px auto;
+  grid-template-areas:
+    ".    header"
+    "main main"
+    ".    footer";
+}
+
+#add-btn {
+  background-color: #3fbeaf;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  padding: 7px;
+  border: none;
+  text-align: center;
+  background-image: url(/img/plus.svg);
+  background-repeat: no-repeat;
+  background-size: 80px;
+  background-position: 10px 10px;
+  position: relative;
+  top: 45px;
+  left: calc(50% - 50px);
+  transition: ease-out 400ms;
+  transform: rotate(0deg);
+}
+
+#add-btn:hover {
+  transform: rotate(90deg);
+}
+
+header,
+main,
+footer {
+  background-color: white;
+}
+
+header {
+  padding-bottom: 50px;
+  grid-area: header;
+}
+main {
+  grid-area: main;
+}
+
+footer {
+  grid-area: footer;
+}
+
+#logo > img {
+  width: 250px;
+}
+
+#logo {
+  margin: 35px;
+  text-align: center;
+}
+
+#date-cnt {
+  display: grid;
+  font-weight: 600;
+  grid-template-columns: 10% auto auto auto 4fr auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    ".  date    month   .   day-of-week ."
+    ".  date    year    .   day-of-week .";
+}
+
+#date {
+  grid-area: date;
+  font-size: 100px;
+  color: #3fbeaf;
+}
+
+#month {
+  position: relative;
+  top: 15px;
+  grid-area: month;
+  font-size: 48px;
+  color: #e51e25;
+}
+
+#year {
+  position: relative;
+  top: -6px;
+  left: 5px;
+  font-size: 38px;
+  grid-area: year;
+  color: #ef7922;
+}
+
+#day-of-week {
+  color: #3fbeaf;
+  text-align: center;
+  grid-area: day-of-week;
+  margin: auto;
+  font-size: 40px;
+}
+
+ul {
+  padding: 0;
+}
+
+il {
+  display: grid;
+  grid-template-columns: 140px 120px 1fr 70px 0px 0px;
+  grid-template-rows: 70px;
+  transition: all 1s;
+}
+
+.il-open {
+  grid-template-columns: 0px 120px 1fr 70px 70px 70px;
+}
+
+.blank {
+  background-color: #2d3031;
+}
+
+.msg-title {
+  border-bottom: 1px solid;
+  width: 100%;
+  font-weight: 600;
+  font-size: 21px;
+  padding: 20px 0 0 0;
+}
+
+.tick {
+  padding: 20% 0 0 50%;
+  left: -500px;
+}
+.tick img {
+  height: 25px;
+  justify-self: center;
+  align-self: stretch;
+}
+
+.arrow {
+  border-bottom: 1px solid;
+  padding: 40%;
+}
+
+.arrow img {
+  height: 18px;
+}
+
+.edit {
+  background-color: #ef7922;
+  text-align: center;
+  padding: 30%;
+  background-image: url(/img/document.svg);
+  background-repeat: no-repeat;
+  background-size: 28px;
+  background-position: 22px 19px;
+}
+
+.delete {
+  background-color: #e51e25;
+  padding: 30%;
+  background-image: url(/img/trash.svg);
+  background-repeat: no-repeat;
+  background-size: 28px;
+  background-position: 22px 19px;
+}
+
+.tick {
+}
