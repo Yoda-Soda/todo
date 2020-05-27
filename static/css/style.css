@@ -250,3 +250,8 @@ form img:hover {
   text-decoration: line-through;
   color: gray;
 }
+
+.event-date {
+  font-size: 0.7em;
+  font-weight: 400;
+}

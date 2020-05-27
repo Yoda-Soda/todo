@@ -28,11 +28,19 @@ let ulTag = document.getElementsByTagName("ul");
 let liTick = document.getElementsByClassName("tick-img");
 let liEdit = document.getElementsByClassName("edit");
 let liDelete = document.getElementsByClassName("delete");
+let dataAray = [];
 
 //loop through all ils' and add onclick handlers
 function addOnClick() {
   for (let i = 0; i < liTag.length; i++) {
     liMsg[i].setAttribute("onclick", "openLi(" + i + ")");
+    liMsg[i].setAttribute("id", "msg" + i);
+    document.getElementById("msg" + i).innerText = dataAray[i][0];
+    document.getElementById("msg" + i).innerHTML =
+      liMsg[i].innerHTML +
+      "<div class='event-date'>" +
+      dataAray[i][1] +
+      "</div>";
     liArrow[i].setAttribute("onclick", "openLi(" + i + ")");
     liTick[i].setAttribute("onclick", "tickOff(" + i + ")");
     liEdit[i].setAttribute("onclick", "editList(" + i + ")");
@@ -63,11 +71,35 @@ function tickOff(liNum) {
 }
 
 function editList(liNum) {
+  document
+    .getElementsByTagName("form")[0]
+    .setAttribute("onsubmit", "return updateData(" + liNum + ")");
+  document.getElementById("form-name").value = dataAray[liNum][0];
+  document.getElementById("event-date").value = dataAray[liNum][1];
   showForm();
+}
+
+function updateData(liNum) {
+  hideForm();
+  document
+    .getElementsByTagName("form")[0]
+    .setAttribute("onsubmit", "return submitForm()");
+  // clear the text in the input box
+  dataAray[liNum][0] = document.getElementById("form-name").value;
+  dataAray[liNum][1] = document.getElementById("event-date").value;
+  document.getElementById("form-name").value = "";
+  document.getElementById("event-date").value = "";
+  openLi(liNum);
+  addOnClick();
+
+  // return false to prevent the default form submit action
+  // which is to send a request and reload the page
+  return false;
 }
 
 function deleteList(liNum) {
   liTag[liNum].remove();
+  dataAray.splice(liNum, 1);
   addOnClick();
 }
 
@@ -87,9 +119,8 @@ updateDate();
 
 function creatNewLi(addDate, addTitle) {
   ulTag[0].innerHTML +=
-    '<li><span class="blank"></span><span class="tick"><img class="tick-img" src="/img/tick.svg" alt="a tick mark"></span><span class="msg-title">' +
-    addTitle +
-    '</span><span class="arrow"><img src="/img/next.svg" alt="arrow to open extra options"></span><span class="edit"></span><span class="delete"></span></li>';
+    '<li><span class="blank"></span><span class="tick"><img class="tick-img" src="/img/tick.svg" alt="a tick mark"></span><span class="msg-title"><div class="event-date"></div></span><span class="arrow"><img src="/img/next.svg" alt="arrow to open extra options"></span><span class="edit"></span><span class="delete"></span></li>';
+  addData(addTitle, addDate);
   addOnClick();
 }
 
@@ -107,7 +138,7 @@ function submitForm() {
   let newTitle = document.getElementById("form-name").value;
 
   // get a reference to the display element
-  let newDate = document.getElementById("event-date");
+  let newDate = document.getElementById("event-date").value;
 
   // update the display element
   creatNewLi(newDate, newTitle);
@@ -120,4 +151,12 @@ function submitForm() {
   // return false to prevent the default form submit action
   // which is to send a request and reload the page
   return false;
+}
+
+function addData(titleStr, dateStr) {
+  dataAray.push([titleStr, dateStr]);
+}
+
+function readData(liNum) {
+  return dataAray[liNum][0];
 }
