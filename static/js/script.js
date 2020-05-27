@@ -28,7 +28,16 @@ let ulTag = document.getElementsByTagName("ul");
 let liTick = document.getElementsByClassName("tick-img");
 let liEdit = document.getElementsByClassName("edit");
 let liDelete = document.getElementsByClassName("delete");
-let dataAray = [];
+
+if (localStorage.length == 0) {
+  var dataAray = [];
+} else {
+  var dataAray = JSON.parse(localStorage.getItem("data"));
+  for (let i = 0; i < dataAray.length; i++) {
+    ulTag[0].innerHTML +=
+      '<li><span class="blank"></span><span class="tick"><img class="tick-img" src="/img/tick.svg" alt="a tick mark"></span><span class="msg-title"><div class="event-date"></div></span><span class="arrow"><img src="/img/next.svg" alt="arrow to open extra options"></span><span class="edit"></span><span class="delete"></span></li>';
+  }
+}
 
 //loop through all ils' and add onclick handlers
 function addOnClick() {
@@ -46,6 +55,7 @@ function addOnClick() {
     liEdit[i].setAttribute("onclick", "editList(" + i + ")");
     liDelete[i].setAttribute("onclick", "deleteList(" + i + ")");
   }
+  localStorage.setItem("data", JSON.stringify(dataAray));
 }
 addOnClick();
 
