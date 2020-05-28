@@ -28,14 +28,14 @@ let ulTag = document.getElementsByTagName("ul");
 let liTick = document.getElementsByClassName("tick-img");
 let liEdit = document.getElementsByClassName("edit");
 let liDelete = document.getElementsByClassName("delete");
-
+let htmlText =
+  '<li><span class="blank"></span><span class="tick"><img class="tick-img" src="/img/tick.svg" alt="a tick mark"></span><span class="msg-title"><div class="event-date"></div></span><span class="arrow"><img src="/img/next.svg" alt="arrow to open extra options"></span><span class="edit"></span><span class="delete"></span></li>';
 if (localStorage.length == 0) {
   var dataAray = [];
 } else {
   var dataAray = JSON.parse(localStorage.getItem("data"));
   for (let i = 0; i < dataAray.length; i++) {
-    ulTag[0].innerHTML +=
-      '<li><span class="blank"></span><span class="tick"><img class="tick-img" src="/img/tick.svg" alt="a tick mark"></span><span class="msg-title"><div class="event-date"></div></span><span class="arrow"><img src="/img/next.svg" alt="arrow to open extra options"></span><span class="edit"></span><span class="delete"></span></li>';
+    ulTag[0].innerHTML += htmlText;
   }
 }
 
@@ -84,6 +84,10 @@ function editList(liNum) {
   document
     .getElementsByTagName("form")[0]
     .setAttribute("onsubmit", "return updateData(" + liNum + ")");
+  document
+    .getElementById("back-arrow")
+    .setAttribute("onclick", "backEdit(" + liNum + ")");
+  document.getElementById("form-heading").innerText = "EDIT EVENT";
   document.getElementById("form-name").value = dataAray[liNum][0];
   document.getElementById("event-date").value = dataAray[liNum][1];
   showForm();
@@ -91,19 +95,11 @@ function editList(liNum) {
 
 function updateData(liNum) {
   hideForm();
-  document
-    .getElementsByTagName("form")[0]
-    .setAttribute("onsubmit", "return submitForm()");
-  // clear the text in the input box
   dataAray[liNum][0] = document.getElementById("form-name").value;
   dataAray[liNum][1] = document.getElementById("event-date").value;
-  document.getElementById("form-name").value = "";
-  document.getElementById("event-date").value = "";
+  clearFormInput();
   openLi(liNum);
   addOnClick();
-
-  // return false to prevent the default form submit action
-  // which is to send a request and reload the page
   return false;
 }
 
@@ -128,10 +124,18 @@ function updateDate() {
 updateDate();
 
 function creatNewLi(addDate, addTitle) {
-  ulTag[0].innerHTML +=
-    '<li><span class="blank"></span><span class="tick"><img class="tick-img" src="/img/tick.svg" alt="a tick mark"></span><span class="msg-title"><div class="event-date"></div></span><span class="arrow"><img src="/img/next.svg" alt="arrow to open extra options"></span><span class="edit"></span><span class="delete"></span></li>';
+  ulTag[0].innerHTML += htmlText;
   addData(addTitle, addDate);
   addOnClick();
+}
+
+function newForm() {
+  document.getElementById("form-heading").innerText = "NEW EVENT";
+  document.getElementById("back-arrow").setAttribute("onclick", "hideForm()");
+  document
+    .getElementsByTagName("form")[0]
+    .setAttribute("onsubmit", "return submitForm()");
+  showForm();
 }
 
 function showForm() {
@@ -144,22 +148,14 @@ function hideForm() {
 }
 
 function submitForm() {
-  // get a reference to the input element value
   let newTitle = document.getElementById("form-name").value;
-
-  // get a reference to the display element
   let newDate = document.getElementById("event-date").value;
-
-  // update the display element
-  creatNewLi(newDate, newTitle);
-  hideForm();
-
-  // clear the text in the input box
-  document.getElementById("form-name").value = "";
-  document.getElementById("event-date").value = "";
-
-  // return false to prevent the default form submit action
-  // which is to send a request and reload the page
+  if (testStr(newTitle)) {
+    creatNewLi(newDate, newTitle);
+    hideForm();
+    clearFormInput();
+    return false;
+  }
   return false;
 }
 
@@ -169,4 +165,24 @@ function addData(titleStr, dateStr) {
 
 function readData(liNum) {
   return dataAray[liNum][0];
+}
+
+function clearFormInput() {
+  document.getElementById("form-name").value = "";
+  document.getElementById("event-date").value = "";
+}
+
+function backEdit(liNum) {
+  clearFormInput();
+  hideForm();
+  openLi(liNum);
+}
+
+function testStr(str) {
+  if (!(typeof str == "string") || str.length == 0) {
+    alert("No Event title has been entered");
+    return false;
+  } else {
+    return true;
+  }
 }

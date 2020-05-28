@@ -27,13 +27,13 @@
             </ul>
         </main>
         <footer>
-            <button id="add-btn" onclick="showForm()"></button>
+            <button id="add-btn" onclick="newForm()"></button>
         </footer>
     </div>
     <div id="overlay">
         <form onsubmit="return submitForm()">
-            <img onclick="hideForm()" src="/img/next.svg" alt="Back arrow">
-            <h2>NEW EVENT</h2>
+            <img id="back-arrow" onclick="hideForm()" src="/img/next.svg" alt="Back arrow">
+            <h2 id="form-heading">NEW EVENT</h2>
             <label for="todo-heading">Name:</label>
             <input type="text" id="form-name" name="name" maxlength="40">
             <label for="birthday">Date:</label>
