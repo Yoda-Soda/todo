@@ -126,6 +126,10 @@ li {
   display: grid;
   grid-template-columns: 140px 120px 1fr 70px 0px 0px;
   grid-template-rows: 70px;
+  -webkit-transition: all 1s; 
+  -moz-transition: all 1s; 
+  -ms-transition: all 1s; 
+  -o-transition: all 1s; 
   transition: all 1s;
 }
 
