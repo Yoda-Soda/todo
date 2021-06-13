@@ -13,13 +13,13 @@ let months = [
   "DEC",
 ];
 let week = [
+  "SUNDAY",
   "MONDAY",
   "TUESDAY",
   "WEDNESDAY",
   "THURSDAY",
   "FRIDAY",
   "SATURDAY",
-  "SUNDAY",
 ];
 let liTag = document.getElementsByTagName("li");
 let liMsg = document.getElementsByClassName("msg-title");
@@ -122,7 +122,7 @@ function updateDate() {
   dateEl.innerText = today.getDate();
   monthEl.innerText = months[today.getMonth()];
   yearEl.innerText = today.getFullYear();
-  dayOfWeek.innerText = week[today.getDay() - 1];
+  dayOfWeek.innerText = week[today.getDay()];
 }
 
 updateDate();
