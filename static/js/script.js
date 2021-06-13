@@ -30,8 +30,12 @@ let liEdit = document.getElementsByClassName("edit");
 let liDelete = document.getElementsByClassName("delete");
 let htmlText =
   '<li><span class="blank"></span><span class="tick"><img class="tick-img" src="/img/tick.svg" alt="a tick mark"></span><span class="msg-title"><div class="event-date"></div></span><span class="arrow"><img src="/img/next.svg" alt="arrow to open extra options"></span><span class="edit"></span><span class="delete"></span></li>';
-if (localStorage.length == 0) {
+
+
+
+if (localStorage.data == undefined) {
   var dataAray = [];
+  dataAray.length = 0
 } else {
   var dataAray = JSON.parse(localStorage.getItem("data"));
   for (let i = 0; i < dataAray.length; i++) {
@@ -39,7 +43,7 @@ if (localStorage.length == 0) {
   }
 }
 
-//loop through all ils' and add onclick handlers
+//loop through all lis' and add onclick handlers
 function addOnClick() {
   for (let i = 0; i < liTag.length; i++) {
     liMsg[i].setAttribute("onclick", "openLi(" + i + ")");
