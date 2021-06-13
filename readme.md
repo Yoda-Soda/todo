@@ -8,4 +8,4 @@ The general idea was to build an simple app using localstorage with out the use 
 
 ## Grid CSS animation
 
-So far to date only firefox supports the grid row and columb animation. Worth checking out if you want to see the sparley animation 🤩
+So far to date only firefox supports the grid row and columb animation. Worth checking out if you want to see the sparkly animation 🤩
