@@ -1,0 +1,1 @@
+So far to date only firefox supports the grid row and columb animation. Worth checking out if you want to see the sparley animation 🤩
